@@ -8,11 +8,17 @@
 
         /* ===== STYLES GLOBAUX (Design Apple) ===== */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            color: #1d1d1f;
-            background-color: #d5e9f1;
-            line-height: 1.6;
-        }
+    font-family: 'Lato', sans-serif; /* Nouvelle police */
+    color: #1d1d1f;
+    background-color: #f0fdf4; /* Fond vert très pâle (Data vibe) au lieu du bleu */
+    line-height: 1.6;
+}
+h1, h2, h3, .logo {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase; /* Met les titres en majuscules */
+    letter-spacing: 1px;
+}
+        
 
         .container {
             max-width: 1200px;
@@ -537,5 +543,147 @@
 
     .contact-form {
         max-width: 100%;
+    }
+}
+/* ====================================================== */
+/* === NOUVEAU DESIGN "DATA DARK" (ANIMATIONS & FOND) === */
+/* ====================================================== */
+
+/* 1. L'Arrière-plan Animé (Dégradé mouvant) */
+body {
+    /* Dégradé Profond : Bleu Nuit, Violet, Cyan */
+    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #0f172a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite; /* Ça bouge tout seul ! */
+    color: #e2e8f0; /* Texte clair */
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. Effet "Verre" (Glassmorphism) sur toutes les boites */
+header, .about, .skills, .projects, .contact, footer, .skill-card, .project-card {
+    background-color: rgba(30, 41, 59, 0.7) !important; /* Fond semi-transparent */
+    backdrop-filter: blur(10px); /* Flou derrière */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Bordure fine brillante */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: #f8fafc !important; /* Force le texte en blanc */
+}
+
+/* Retirer les fonds blancs des sections spécifiques */
+.hero, .about, .skills, .projects, .contact {
+    background: transparent !important;
+}
+
+/* 3. Titres et Textes en surbrillance */
+h1, h2, h3, .logo {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.3); /* Légère lueur */
+}
+
+p, .nav-links a {
+    color: #cbd5e1 !important; /* Gris clair très lisible */
+}
+
+/* 4. Animation d'apparition au chargement */
+.hero, .about, .skills-grid, .projects-grid {
+    animation: fadeInUp 1.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 5. Boutons et Liens en Vert Néon (Data Style) */
+.cta-button, .submit-button {
+    background: linear-gradient(90deg, #10b981, #3b82f6) !important;
+    border: none;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    font-weight: bold;
+    color: white !important;
+}
+
+.cta-button:hover, .submit-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+}
+
+.project-link, .nav-links a:hover {
+    color: #34d399 !important; /* Vert clair au survol */
+}
+/* === ANIMATION 1 : Lévitation des icônes === */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); } /* Ça monte */
+    100% { transform: translateY(0px); } /* Ça redescend */
+}
+
+/* On applique l'animation aux icônes */
+.skill-icon {
+    display: inline-block;
+    animation: float 3s ease-in-out infinite; /* Boucle infinie */
+}
+
+/* On décale un peu la 2ème et 3ème carte pour pas qu'elles bougent en même temps (plus naturel) */
+.skill-card:nth-child(2) .skill-icon { animation-delay: 0.5s; }
+.skill-card:nth-child(3) .skill-icon { animation-delay: 1s; }
+/* === ANIMATION 2 : Pulsation du bouton === */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); } /* L'ombre s'agrandit et disparaît */
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.cta-button {
+    animation: pulseGlow 2s infinite;
+}
+/* === ANIMATION 3 : Apparition au chargement === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* Part de plus bas */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* On applique l'effet au Hero, À propos et Projets */
+.hero, .about-content, .projects-grid, .skills-grid {
+    animation: fadeInUp 1.2s ease-out forwards; /* 1.2 secondes */
+}
+/* ========================================= */
+/* === ANIMATION TITRE (Style Animista) === */
+/* ========================================= */
+
+/* 1. On applique l'animation au titre principal */
+.hero h1 {
+    animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    /* Petit délai pour qu'il arrive après le chargement du fond */
+    animation-delay: 0.5s; 
+}
+
+/* 2. La définition de l'animation (Les lettres s'écartent) */
+@keyframes tracking-in-expand {
+    0% {
+        letter-spacing: -0.5em; /* Les lettres sont écrasées */
+        opacity: 0;
+    }
+    40% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
     }
 }
